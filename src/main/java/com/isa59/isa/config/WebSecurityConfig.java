@@ -3,7 +3,7 @@ package com.isa59.isa.config;
 import com.isa59.isa.security.TokenUtils;
 import com.isa59.isa.security.auth.RestAuthenticationEntryPoint;
 import com.isa59.isa.security.auth.TokenAuthenticationFilter;
-import com.isa59.isa.service.CustomUserDetailsService;
+import com.isa59.isa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Autowired
-	private CustomUserDetailsService jwtUserDetailsService;
+	private UserService jwtUserDetailsService;
 
 	@Autowired
 	private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
