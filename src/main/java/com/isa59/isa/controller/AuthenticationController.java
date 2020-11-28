@@ -1,10 +1,13 @@
 package com.isa59.isa.controller;
 
 import com.isa59.isa.model.User;
+import com.isa59.isa.model.UserRequest;
 import com.isa59.isa.model.UserTokenState;
 import com.isa59.isa.security.TokenUtils;
 import com.isa59.isa.security.auth.JwtAuthenticationRequest;
+import com.isa59.isa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +31,9 @@ public class AuthenticationController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	@Autowired
+	private UserService userService;
+
 	@PostMapping("/login")
 	public ResponseEntity<UserTokenState> createAuthenticationToken(
 			@RequestBody JwtAuthenticationRequest authenticationRequest, HttpServletResponse response) {
@@ -43,6 +49,17 @@ public class AuthenticationController {
 		int expiresIn = tokenUtils.getExpiredIn();
 
 		return ResponseEntity.ok(new UserTokenState(jwt, expiresIn));
+	}
+
+	@PostMapping("/signup")
+	public ResponseEntity<User> addUser(@RequestBody UserRequest userDTO) {
+
+		User existUser = userService.findByUsername(userDTO.getUsername());
+		if (existUser != null)
+			return new ResponseEntity<>(existUser, HttpStatus.CONFLICT);
+
+		User createdUser = userService.save(userDTO);
+		return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
 	}
 
 }

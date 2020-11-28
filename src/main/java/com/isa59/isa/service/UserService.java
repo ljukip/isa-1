@@ -1,6 +1,8 @@
 package com.isa59.isa.service;
 
+import com.isa59.isa.model.Authority;
 import com.isa59.isa.model.User;
+import com.isa59.isa.model.UserRequest;
 import com.isa59.isa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
@@ -43,6 +45,21 @@ public class UserService implements UserDetailsService {
 
 	public List<User> findAll() throws AccessDeniedException {
 		return userRepository.findAll();
+	}
+
+	public User save(UserRequest userDTO) {
+		User u = new User();
+		u.setUsername(userDTO.getUsername());
+		u.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+		u.setFirstName(userDTO.getFirstName());
+		u.setLastName(userDTO.getLastName());
+		u.setEnabled(true);
+
+		List<Authority> auth = authService.findByName("ROLE_USER");
+		u.setAuthorities(auth);
+
+		u = this.userRepository.save(u);
+		return u;
 	}
 
 }
