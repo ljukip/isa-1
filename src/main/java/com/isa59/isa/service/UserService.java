@@ -1,8 +1,8 @@
 package com.isa59.isa.service;
 
+import com.isa59.isa.dto.PatientDTO;
 import com.isa59.isa.model.Authority;
 import com.isa59.isa.model.User;
-import com.isa59.isa.model.UserRequest;
 import com.isa59.isa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
@@ -47,15 +47,19 @@ public class UserService implements UserDetailsService {
 		return userRepository.findAll();
 	}
 
-	public User save(UserRequest userDTO) {
+	public User save(PatientDTO userDTO) {
 		User u = new User();
 		u.setUsername(userDTO.getUsername());
 		u.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-		u.setFirstName(userDTO.getFirstName());
-		u.setLastName(userDTO.getLastName());
-		u.setEnabled(true);
+		u.setFirstName(userDTO.getFirstname());
+		u.setLastName(userDTO.getLastname());
+		u.setAddress(userDTO.getAddress());
+		u.setCity(userDTO.getCity());
+		u.setCountry(userDTO.getCountry());
+		u.setPhone(userDTO.getPhone());
+		u.setEnabled(false);
 
-		List<Authority> auth = authService.findByName("ROLE_USER");
+		List<Authority> auth = authService.findByName("ROLE_PATIENT");
 		u.setAuthorities(auth);
 
 		u = this.userRepository.save(u);
