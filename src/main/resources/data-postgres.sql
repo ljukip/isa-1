@@ -17,3 +17,12 @@ INSERT INTO AUTHORITY (name) VALUES ('ROLE_SUPPLIER');
 
 INSERT INTO USER_AUTHORITY (user_id, authority_id) VALUES (1, 1);
 INSERT INTO USER_AUTHORITY (user_id, authority_id) VALUES (2, 5);
+
+INSERT INTO pharmacy(address, description, name)VALUES ('Ulica', 'Apoteka1', 'Pharmacy');
+INSERT INTO USERS (username, password, first_name, last_name, enabled, last_password_reset_date) VALUES ('phAdmin', '$2a$10$jWhaJbtjUv1b5mSckilU2euzDh8oLYrQ77iEqkw1SMrQY1a3QVZW2', 'Pharmacy', 'Admin', true, '2021-01-30 19:59:58.108');
+INSERT INTO USER_AUTHORITY (user_id, authority_id) VALUES (3, 4);
+INSERT INTO pharmacy_admin(id, pharmacy_id)VALUES (3, 1);
+INSERT INTO medication(name)VALUES ('brufen');
+INSERT INTO medication(name)VALUES ('rapidol');
+INSERT INTO medication(name)VALUES ('andol');
+INSERT INTO medication(name)VALUES ('gentamicin');
