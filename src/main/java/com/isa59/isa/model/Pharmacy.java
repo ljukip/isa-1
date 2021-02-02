@@ -26,16 +26,16 @@ public class Pharmacy {
 	private String address;
 	
 	@OneToMany
-	private List<Pharmacist> pharmacists;
+	private List<User> pharmacists;
 	
 	@ManyToMany
-	private List<Dermatologist> dermatologists;
+	private List<User> dermatologists;
 	
 	@OneToMany
 	private List<MedicationData> medicationDatas;
 	
 	@OneToMany
-	private List<PharmacyAdmin> phAdmins;
+	private List<User> phAdmins;
 	
 	//private float averageRating;
 	
@@ -73,25 +73,7 @@ public class Pharmacy {
 	}
 
 
-	public List<Pharmacist> getPharmacists() {
-		return pharmacists;
-	}
-
-
-	public void setPharmacists(List<Pharmacist> pharmacists) {
-		this.pharmacists = pharmacists;
-	}
-
-
-	public List<Dermatologist> getDermatologists() {
-		return dermatologists;
-	}
-
-
-	public void setDermatologists(List<Dermatologist> dermatologists) {
-		this.dermatologists = dermatologists;
-	}
-
+	
 
 	public List<MedicationData> getMedicationDatas() {
 		return medicationDatas;
@@ -113,14 +95,33 @@ public class Pharmacy {
 	}
 
 
-	public List<PharmacyAdmin> getPhAdmins() {
+	public List<User> getPharmacists() {
+		return pharmacists;
+	}
+
+
+	public void setPharmacists(List<User> pharmacists) {
+		this.pharmacists = pharmacists;
+	}
+
+
+	public List<User> getDermatologists() {
+		return dermatologists;
+	}
+
+
+	public void setDermatologists(List<User> dermatologists) {
+		this.dermatologists = dermatologists;
+	}
+
+
+	public List<User> getPhAdmins() {
 		return phAdmins;
 	}
 
 
-	public void setPhAdmins(List<PharmacyAdmin> phAdmins) {
+	public void setPhAdmins(List<User> phAdmins) {
 		this.phAdmins = phAdmins;
 	}
-	
 
 }

@@ -31,6 +31,9 @@ public class Buying {
 	private LocalDate dueDate;
 	
 	private boolean finished;
+	
+	@ManyToOne
+	private User cretaedByAdmin;
 
 	public Buying() {}
 
@@ -73,8 +76,12 @@ public class Buying {
 	public void setFinished(boolean finished) {
 		this.finished = finished;
 	}
-	
-	
-	
-	
+
+	public User getCretaedByAdmin() {
+		return cretaedByAdmin;
+	}
+
+	public void setCretaedByAdmin(User cretaedByAdmin) {
+		this.cretaedByAdmin = cretaedByAdmin;
+	}
 }
