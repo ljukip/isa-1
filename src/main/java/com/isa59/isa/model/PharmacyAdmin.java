@@ -9,4 +9,14 @@ public class PharmacyAdmin extends User{
 	@ManyToOne
 	private Pharmacy pharmacy;
 
+	public Pharmacy getPharmacy() {
+		return pharmacy;
+	}
+
+	public void setPharmacy(Pharmacy pharmacy) {
+		this.pharmacy = pharmacy;
+	}
+	
+	
+
 }
