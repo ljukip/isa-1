@@ -37,6 +37,21 @@ public class User implements UserDetails {
 	@Column
 	private Timestamp lastPasswordResetDate;
 
+	@Column
+	private String address;
+
+	@Column
+	private String city;
+
+	@Column
+	private String country;
+
+	@Column
+	private String phone;
+
+	@Column
+	private String role;
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_authority",
 			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -102,6 +117,46 @@ public class User implements UserDetails {
 
 	public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
 		this.lastPasswordResetDate = lastPasswordResetDate;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	@Override
