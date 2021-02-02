@@ -1,11 +1,14 @@
 package com.isa59.isa.controller;
 
+import com.isa59.isa.dto.PatientDTO;
 import com.isa59.isa.model.User;
-import com.isa59.isa.model.UserRequest;
 import com.isa59.isa.model.UserTokenState;
 import com.isa59.isa.security.TokenUtils;
 import com.isa59.isa.security.auth.JwtAuthenticationRequest;
+import com.isa59.isa.service.EmailService;
 import com.isa59.isa.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,6 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthenticationController {
 
+	private Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+
 	@Autowired
 	private TokenUtils tokenUtils;
 
@@ -33,6 +38,9 @@ public class AuthenticationController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private EmailService emailService;
 
 	@PostMapping("/login")
 	public ResponseEntity<UserTokenState> createAuthenticationToken(
@@ -45,20 +53,26 @@ public class AuthenticationController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		User user = (User) authentication.getPrincipal();
-		String jwt = tokenUtils.generateToken(user.getUsername());
+		String jwt = tokenUtils.generateToken(user.getUsername(), user.getRole());
 		int expiresIn = tokenUtils.getExpiredIn();
 
 		return ResponseEntity.ok(new UserTokenState(jwt, expiresIn));
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<User> addUser(@RequestBody UserRequest userDTO) {
+	public ResponseEntity<User> addUser(@RequestBody PatientDTO userDTO) {
 
 		User existUser = userService.findByUsername(userDTO.getUsername());
 		if (existUser != null)
 			return new ResponseEntity<>(existUser, HttpStatus.CONFLICT);
 
 		User createdUser = userService.save(userDTO);
+		try {
+			emailService.sendMail(createdUser);
+		} catch (Exception e) {
+			logger.info("Error sending mail: " + e.getMessage());
+		}
+
 		return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
 	}
 
