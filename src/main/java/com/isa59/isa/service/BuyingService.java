@@ -1,5 +1,6 @@
 package com.isa59.isa.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,11 +12,9 @@ import com.isa59.isa.dto.BuyingItemDTO;
 import com.isa59.isa.model.Buying;
 import com.isa59.isa.model.BuyingItem;
 import com.isa59.isa.model.Medication;
-import com.isa59.isa.model.PharmacyAdmin;
 import com.isa59.isa.model.User;
 import com.isa59.isa.repository.BuyingRepository;
 import com.isa59.isa.repository.MedicationRepository;
-import com.isa59.isa.repository.PharmacyAdminRepository;
 import com.isa59.isa.repository.PharmacyRepository;
 import com.isa59.isa.repository.UserRepository;
 
@@ -32,9 +31,9 @@ public class BuyingService {
 	private UserRepository userRepository;
 	
 	@Autowired
-	private PharmacyAdminRepository pharmacyAdminRepository;
+	private PharmacyRepository pharmacyRepository; 
 	
-	
+
 	
 	public BuyingDTO create(String userName, BuyingDTO buyingDTO) {
 		
@@ -45,8 +44,10 @@ public class BuyingService {
 		buying.setItems(items);
 		
 		User u = userRepository.findByUsername(userName);
-		PharmacyAdmin pa = pharmacyAdminRepository.findById(u.getId()).get();
-		buying.setPharmacy(pa.getPharmacy());
+		List<User> users = new ArrayList<>();
+		users.add(u);
+		buying.setCretaedByAdmin(u);
+		buying.setPharmacy(pharmacyRepository.findOneByPhAdminsIn(users));
 		
 		buyingRepository.saveAndFlush(buying);
 		return BDTOfromB(buying);
