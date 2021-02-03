@@ -18,11 +18,13 @@ public class AppointmentDermatologyService {
 	public List<AppointmentDermatology> getAll(){
 		List<AppointmentDermatology> appointments= new ArrayList<>();
 		repository.findAll().forEach(appointments::add);
+		System.out.println("inGetAllService" +  appointments);
 		return appointments;
 	}
 	
 	public List<AppointmentDermatology> getAllFree(){
 		List<AppointmentDermatology> allAppointments= repository.findAll();
+		System.out.println("inGetFreeService" +  allAppointments);
 		List<AppointmentDermatology> freeAppointments= new ArrayList<>();
 		for(AppointmentDermatology a : allAppointments) {
 			if(a.getPatientID()==null) {

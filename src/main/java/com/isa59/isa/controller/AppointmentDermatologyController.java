@@ -26,8 +26,9 @@ public class AppointmentDermatologyController {
 	
 	@GetMapping("/all")
 	public ResponseEntity<List<AppointmentDermatology>> getAppointments() {
-
+		
 		List<AppointmentDermatology> appointments=service.getAll();
+		//System.out.println("inAll:" + appointments);
 		return new ResponseEntity<>(appointments,HttpStatus.OK);
 	}
 	

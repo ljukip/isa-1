@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "appointmentsDermatology")
+@Table(name = "appointmentDermatology")
 public class AppointmentDermatology {
 	
 	@Id
@@ -25,7 +25,7 @@ public class AppointmentDermatology {
 	private String patientID; //patientID = username
 
 	@Column(nullable = false)
-	private String time;
+	private String times;
 
 	@Column(nullable = true)
 	private String duration;
@@ -34,7 +34,7 @@ public class AppointmentDermatology {
 	private Long price;
 
 	@Column(nullable = false)
-	private Timestamp date;
+	private Timestamp dates;
 
 	public AppointmentDermatology() {
 		super();
@@ -46,10 +46,10 @@ public class AppointmentDermatology {
 		super();
 		this.id = id;
 		this.dermatologistID = dermatologistID;
-		this.time = time;
+		this.times = time;
 		this.duration = duration;
 		this.price = price;
-		this.date = date;
+		this.dates = date;
 	}
 
 	public Long getId() {
@@ -69,11 +69,11 @@ public class AppointmentDermatology {
 	}
 
 	public String getTime() {
-		return time;
+		return times;
 	}
 
 	public void setTime(String time) {
-		this.time = time;
+		this.times = time;
 	}
 
 	public String getDuration() {
@@ -93,11 +93,11 @@ public class AppointmentDermatology {
 	}
 
 	public Timestamp getDate() {
-		return date;
+		return dates;
 	}
 
 	public void setDate(Timestamp date) {
-		this.date = date;
+		this.dates = date;
 	}
 
 	public String getPatientID() {

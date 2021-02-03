@@ -5,7 +5,6 @@ import com.isa59.isa.model.User;
 import com.isa59.isa.model.UserTokenState;
 import com.isa59.isa.security.TokenUtils;
 import com.isa59.isa.security.auth.JwtAuthenticationRequest;
-import com.isa59.isa.service.EmailService;
 import com.isa59.isa.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,8 +38,6 @@ public class AuthenticationController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private EmailService emailService;
 
 	@PostMapping("/login")
 	public ResponseEntity<UserTokenState> createAuthenticationToken(
@@ -67,12 +64,6 @@ public class AuthenticationController {
 			return new ResponseEntity<>(existUser, HttpStatus.CONFLICT);
 
 		User createdUser = userService.save(userDTO);
-		try {
-			emailService.sendMail(createdUser);
-		} catch (Exception e) {
-			logger.info("Error sending mail: " + e.getMessage());
-		}
-
 		return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
 	}
 
