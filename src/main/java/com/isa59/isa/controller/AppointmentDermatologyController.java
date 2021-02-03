@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.isa59.isa.model.AppointmentDermatology;
 import com.isa59.isa.service.AppointmentDermatologyService;
 
@@ -46,17 +47,18 @@ public class AppointmentDermatologyController {
 		return new ResponseEntity<>(appointment, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/reserve/{patientID}")
-	public ResponseEntity<AppointmentDermatology> reserveAppointment(@RequestBody long appointmentID, @PathVariable String patientID) {
-
+	@PostMapping("/reserve/{appointmentID}")
+	public ResponseEntity<AppointmentDermatology> reserveAppointment(@RequestBody String patientID, @PathVariable long appointmentID) {
+		
 		AppointmentDermatology appointment=service.reserve(appointmentID, patientID);
-		return new ResponseEntity<>(appointment,HttpStatus.OK);
+		System.out.println("inReserveController" + appointment);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PutMapping("/cancel/{patientID}")
 	public ResponseEntity<AppointmentDermatology> cancelAppointment(@RequestBody long appointmentID, @PathVariable String patientID) {
 
 		AppointmentDermatology appointment=service.cancel(appointmentID, patientID);
-		return new ResponseEntity<>(appointment,HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

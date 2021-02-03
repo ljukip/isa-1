@@ -11,5 +11,7 @@ import com.isa59.isa.model.AppointmentDermatology;
 
 
 public interface AppointmentDermatologyRepositiry extends JpaRepository<AppointmentDermatology, Long> {
+	
+	List<AppointmentDermatology> findAll();
 
 }

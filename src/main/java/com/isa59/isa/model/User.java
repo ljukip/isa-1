@@ -51,12 +51,21 @@ public class User implements UserDetails {
 
 	@Column
 	private String role;
+	
+	private String jwt;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_authority",
 			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
 			inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
 	private List<Authority> authorities;
+
+	
+	
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Long getId() {
 		return id;
@@ -185,5 +194,15 @@ public class User implements UserDetails {
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
+
+	public String getJwt() {
+		return jwt;
+	}
+
+	public void setJwt(String jwt) {
+		this.jwt = jwt;
+	}
+	
+	
 
 }

@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.isa59.isa.model.AppointmentDermatology;
 import com.isa59.isa.repository.AppointmentDermatologyRepositiry;
 
@@ -27,7 +30,9 @@ public class AppointmentDermatologyService {
 		System.out.println("inGetFreeService" +  allAppointments);
 		List<AppointmentDermatology> freeAppointments= new ArrayList<>();
 		for(AppointmentDermatology a : allAppointments) {
-			if(a.getPatientID()==null) {
+
+			System.out.println("inGetFreeService" +  a.getPatientID());
+			if(a.getPatientID().equals("") || a.getPatientID().equals(null)) {
 				freeAppointments.add(a);
 			}
 		}
@@ -49,20 +54,22 @@ public class AppointmentDermatologyService {
 	//TODO: get dermatologist by id
 	
 	public void add(AppointmentDermatology appointment) {
-		repository.save(appointment);
+		repository.saveAndFlush(appointment);
 	}
 	
 	public AppointmentDermatology reserve(long appointmentID, String patientID) {
 		AppointmentDermatology appointment=repository.getOne(appointmentID);
 		appointment.setPatientID(patientID);
-		repository.save(appointment);
+		System.out.println("inreserve:" + appointment);
+		repository.saveAndFlush(appointment);
 		return appointment;
 	}
 	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public AppointmentDermatology cancel(long appointmentID, String patientID) {
-		AppointmentDermatology appointment=repository.getOne(appointmentID);
+		AppointmentDermatology appointment=repository.findById(appointmentID).get();
 		appointment.setPatientID(null);
-		repository.save(appointment);
+		repository.saveAndFlush(appointment);
 		return appointment;
 	}
 
