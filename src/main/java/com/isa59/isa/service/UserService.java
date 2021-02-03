@@ -57,7 +57,7 @@ public class UserService implements UserDetailsService {
 		u.setCity(userDTO.getCity());
 		u.setCountry(userDTO.getCountry());
 		u.setPhone(userDTO.getPhone());
-		u.setEnabled(false);
+		u.setEnabled(true);
 
 		List<Authority> auth = authService.findByName("ROLE_PATIENT");
 		u.setAuthorities(auth);

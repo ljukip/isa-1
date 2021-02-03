@@ -53,10 +53,10 @@ public class AuthenticationController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		User user = (User) authentication.getPrincipal();
-		String jwt = tokenUtils.generateToken(user.getUsername(), user.getRole());
+		String jwt = tokenUtils.generateToken(user.getUsername());
 		int expiresIn = tokenUtils.getExpiredIn();
 
-		return ResponseEntity.ok(new UserTokenState(jwt, expiresIn));
+		return ResponseEntity.ok(new UserTokenState(jwt, expiresIn, user.getRole()));
 	}
 
 	@PostMapping("/signup")
@@ -67,11 +67,11 @@ public class AuthenticationController {
 			return new ResponseEntity<>(existUser, HttpStatus.CONFLICT);
 
 		User createdUser = userService.save(userDTO);
-		try {
-			emailService.sendMail(createdUser);
-		} catch (Exception e) {
-			logger.info("Error sending mail: " + e.getMessage());
-		}
+//		try {
+//			emailService.sendMail(createdUser);
+//		} catch (Exception e) {
+//			logger.info("Error sending mail: " + e.getMessage());
+//		}
 
 		return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
 	}
