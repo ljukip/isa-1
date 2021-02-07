@@ -48,24 +48,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private TokenUtils tokenUtils;
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-				.exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
-				.authorizeRequests().antMatchers("/auth/**").permitAll().anyRequest().authenticated().and()
-				.cors().and()
-				.addFilterBefore(new TokenAuthenticationFilter(tokenUtils, jwtUserDetailsService),
-						BasicAuthenticationFilter.class);
-
-		http.csrf().disable();
-	}
 
 	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
-		web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**",
-				"/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js");
-	}
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+    }
 
 }
