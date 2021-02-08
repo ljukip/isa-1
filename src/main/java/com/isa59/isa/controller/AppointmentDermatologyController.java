@@ -40,6 +40,14 @@ public class AppointmentDermatologyController {
 		return new ResponseEntity<>(appointments,HttpStatus.OK);
 	}
 	
+	@GetMapping("/patientAppointments/{patientID}")
+	public ResponseEntity<List<AppointmentDermatology>> getPatientAppointments( @PathVariable String patientID) {
+
+		List<AppointmentDermatology> appointments=service.getPatientsAppointments(patientID);
+		System.out.println("inPatientsAppointments:" + appointments);
+		return new ResponseEntity<>(appointments,HttpStatus.OK);
+	}
+	
 	@PostMapping("/new")
 	public ResponseEntity<AppointmentDermatology> newAppointment(@RequestBody AppointmentDermatology appointment) {
 
@@ -55,9 +63,9 @@ public class AppointmentDermatologyController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@PutMapping("/cancel/{patientID}")
-	public ResponseEntity<AppointmentDermatology> cancelAppointment(@RequestBody long appointmentID, @PathVariable String patientID) {
-
+	@PostMapping("/cancel/{appointmentID}")
+	public ResponseEntity<AppointmentDermatology> cancelAppointment(@RequestBody String patientID, @PathVariable long appointmentID) {
+		System.out.println("in cancel" + patientID);
 		AppointmentDermatology appointment=service.cancel(appointmentID, patientID);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

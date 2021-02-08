@@ -4,7 +4,7 @@ INSERT INTO public.users(
 
 INSERT INTO public.appointmentdermatology(
 	id, dates, dermatologistid, duration, patientid, price, times)
-	VALUES (2, '2022-01-30 19:59:58.108', 1, 30, 'user', 30, '7:30');
+	VALUES (2, '2021-01-30 19:59:58.108', 1, 30, 'user', 30, '7:30');
 	
 INSERT INTO public.appointmentdermatology(
 	id, dates, dermatologistid, duration, patientid, price, times)

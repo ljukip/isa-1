@@ -32,7 +32,7 @@ public class AppointmentDermatologyService {
 		for(AppointmentDermatology a : allAppointments) {
 
 			System.out.println("inGetFreeService" +  a.getPatientID());
-			if(a.getPatientID().equals("") || a.getPatientID().equals(null)) {
+			if(a.getPatientID()==null || a.getPatientID().equals("")) {
 				freeAppointments.add(a);
 			}
 		}
@@ -43,7 +43,8 @@ public class AppointmentDermatologyService {
 		List<AppointmentDermatology> allAppointments= repository.findAll();
 		List<AppointmentDermatology> appointments= new ArrayList<>();
 		for(AppointmentDermatology a : allAppointments) {
-			if(a.getPatientID()==patientID) {
+			System.out.println("poredi1: " + a.getPatientID() +" i "+ patientID);
+			if(a.getPatientID()!=null && a.getPatientID().startsWith(patientID)) { //fix to work with full id
 				appointments.add(a);
 				//future-passed check is done on the front
 			}
@@ -68,6 +69,7 @@ public class AppointmentDermatologyService {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public AppointmentDermatology cancel(long appointmentID, String patientID) {
 		AppointmentDermatology appointment=repository.findById(appointmentID).get();
+		System.out.println("inCancel" +  appointment);
 		appointment.setPatientID(null);
 		repository.saveAndFlush(appointment);
 		return appointment;
