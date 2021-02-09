@@ -2,17 +2,26 @@ INSERT INTO public.users(
 	id, address, city, country, enabled, firstname, lastname, lastpasswordresetdate, password, phone, role, username)
 	VALUES (14, '', '', '', true, '', '', '2021-01-30 19:59:58.108', '$2a$10$lbE2z83s2ujR3/zakPwuveo/SVQp0w7cyb1wBJ9NeFtP6K7zDD3sK', '', 'PATIENT', 'user');
 
-INSERT INTO public.appointmentdermatology(
-	id, dates, dermatologistid, duration, patientid, price, times)
-	VALUES (2, '2021-01-30 19:59:58.108', 1, 30, 'user', 30, '7:30');
+INSERT INTO public.users(
+	id, address, city, country, enabled, firstname, lastname, lastpasswordresetdate, password, phone, role, username)
+	VALUES (15, '', '', '', true, 'pera', 'peric', '2021-01-30 19:59:58.108', '$2a$10$lbE2z83s2ujR3/zakPwuveo/SVQp0w7cyb1wBJ9NeFtP6K7zDD3sK', '', 'DERMATOLOGIST', 'dermatologist2');
+
+INSERT INTO public.users(
+	id, address, city, country, enabled, firstname, lastname, lastpasswordresetdate, password, phone, role, username)
+	VALUES (16, '', '', '', true, 'jova', 'jovic', '2021-01-30 19:59:58.108', '$2a$10$lbE2z83s2ujR3/zakPwuveo/SVQp0w7cyb1wBJ9NeFtP6K7zDD3sK', '', 'DERMATOLOGIST', 'dermatologist1');
+
 	
 INSERT INTO public.appointmentdermatology(
-	id, dates, dermatologistid, duration, patientid, price, times)
-	VALUES (3, '2023-01-30 19:59:58.108', 1, 30, 'user', 30, '7:30');
+	id, dates, dermatologistid, duration, patientid, price, times, dermatologist)
+	VALUES (2, '2021-01-30 19:59:58.108', 'dermatologist1', 30, 'user', 30, '7:30', null);
 	
 INSERT INTO public.appointmentdermatology(
-	id, dates, dermatologistid, duration, patientid, price, times)
-	VALUES (4, '2023-01-30 19:59:58.108', 1, 30, '', 30, '7:30');
+	id, dates, dermatologistid, duration, patientid, price, times, dermatologist)
+	VALUES (3, '2023-01-30 19:59:58.108', 'dermatologist2', 30, 'user', 30, '7:30', null);
+	
+INSERT INTO public.appointmentdermatology(
+	id, dates, dermatologistid, duration, patientid, price, times, dermatologist)
+	VALUES (4, '2023-01-30 19:59:58.108', 'dermatologist1', 30, '', 30, '7:30', null);
 
 
 

@@ -23,7 +23,7 @@ public class Pharmacy {
 	@Column(nullable = false , unique = true)
 	private String name;
 	
-	
+	@Column(nullable = true)
 	private String description;
 	
 	@Column(nullable = false)
@@ -34,6 +34,13 @@ public class Pharmacy {
 	private String country;
 	@Column(nullable = true)
 	private double mark;
+	
+	@Column(nullable = true)
+	private Long rating;
+	
+	@Column(nullable = true)
+	private Long consultationPrice;
+	
 	
 	@OneToMany
 	private List<User> pharmacists;
