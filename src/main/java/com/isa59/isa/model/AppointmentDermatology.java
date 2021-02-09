@@ -19,7 +19,7 @@ public class AppointmentDermatology {
 	private Long id;
 
 	@Column(nullable = false)
-	private Long dermatologistID;
+	private String dermatologistID;
 	
 	@Column(nullable = true)
 	private String patientID; //patientID = username
@@ -35,22 +35,44 @@ public class AppointmentDermatology {
 
 	@Column(nullable = false)
 	private Timestamp dates;
+	
+
+	@Column(nullable = true)
+	private User dermatologist;
 
 	public AppointmentDermatology() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public AppointmentDermatology(Long id, Long dermatologistID, String time, String duration, Long price,
-			Timestamp date) {
+	
+
+	public AppointmentDermatology(Long id, String dermatologistID, String patientID, String times, String duration,
+			Long price, Timestamp dates, User dermatologist) {
 		super();
 		this.id = id;
 		this.dermatologistID = dermatologistID;
-		this.times = time;
+		this.patientID = patientID;
+		this.times = times;
 		this.duration = duration;
 		this.price = price;
-		this.dates = date;
+		this.dates = dates;
+		this.dermatologist = dermatologist;
 	}
+
+
+
+	public User getDermatologist() {
+		return dermatologist;
+	}
+
+
+
+	public void setDermatologist(User dermatologist) {
+		this.dermatologist = dermatologist;
+	}
+
+
 
 	public Long getId() {
 		return id;
@@ -60,13 +82,14 @@ public class AppointmentDermatology {
 		this.id = id;
 	}
 
-	public Long getDermatologistID() {
+	public String getDermatologistID() {
 		return dermatologistID;
 	}
 
-	public void setDermatologistID(Long dermatologistID) {
+	public void setDermatologistID(String dermatologistID) {
 		this.dermatologistID = dermatologistID;
 	}
+	
 
 	public String getTime() {
 		return times;

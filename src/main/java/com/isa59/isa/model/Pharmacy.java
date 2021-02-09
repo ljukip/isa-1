@@ -19,11 +19,18 @@ public class Pharmacy {
 	@Column(nullable = false , unique = true)
 	private String name;
 	
-	
+	@Column(nullable = true)
 	private String description;
 	
 	@Column(nullable = false)
 	private String address;
+	
+	@Column(nullable = true)
+	private Long rating;
+	
+	@Column(nullable = true)
+	private Long consultationPrice;
+	
 	
 	@OneToMany
 	private List<User> pharmacists;

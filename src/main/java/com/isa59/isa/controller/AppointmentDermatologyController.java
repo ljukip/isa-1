@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.isa59.isa.model.AppointmentDermatology;
+import com.isa59.isa.model.User;
 import com.isa59.isa.service.AppointmentDermatologyService;
 
 @RestController
@@ -46,6 +47,14 @@ public class AppointmentDermatologyController {
 		List<AppointmentDermatology> appointments=service.getPatientsAppointments(patientID);
 		System.out.println("inPatientsAppointments:" + appointments);
 		return new ResponseEntity<>(appointments,HttpStatus.OK);
+	}
+	
+	@GetMapping("/getDermatologist/{id}")
+	public ResponseEntity<User> getDermatologist( @PathVariable String id) {
+
+		User dermatologist=service.getDermatologist(id);
+		System.out.println("inGetDerm:" + dermatologist);
+		return new ResponseEntity<>(dermatologist,HttpStatus.OK);
 	}
 	
 	@PostMapping("/new")
