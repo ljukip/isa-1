@@ -9,5 +9,7 @@ import com.isa59.isa.model.User;
 
 public interface PharmacyRepository extends JpaRepository<Pharmacy, Long> {
 	
-	public Pharmacy findOneByPhAdminsIn(List<User> users);
+//	public Pharmacy findOneByPhAdminsIn(List<User> users);
+	List<Pharmacy> findAll();
+//	Pharmacy findByName(String name);
 }

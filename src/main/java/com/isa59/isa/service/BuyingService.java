@@ -47,7 +47,7 @@ public class BuyingService {
 		List<User> users = new ArrayList<>();
 		users.add(u);
 		buying.setCretaedByAdmin(u);
-		buying.setPharmacy(pharmacyRepository.findOneByPhAdminsIn(users));
+//		buying.setPharmacy(pharmacyRepository.findOneByPhAdminsIn(users));
 		
 		buyingRepository.saveAndFlush(buying);
 		return BDTOfromB(buying);

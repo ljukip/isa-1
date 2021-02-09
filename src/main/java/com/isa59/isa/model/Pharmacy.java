@@ -9,8 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@Table(name = "pharmacies")
 public class Pharmacy {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +28,12 @@ public class Pharmacy {
 	
 	@Column(nullable = false)
 	private String address;
+	@Column(nullable = false)
+	private String city;
+	@Column(nullable = false)
+	private String country;
+	@Column(nullable = true)
+	private double mark;
 	
 	@OneToMany
 	private List<User> pharmacists;
@@ -40,7 +50,9 @@ public class Pharmacy {
 	//private float averageRating;
 	
 	
-	public Pharmacy() {}
+	public Pharmacy() {
+		super();
+	}
 
 
 	public Long getId() {
@@ -122,6 +134,36 @@ public class Pharmacy {
 
 	public void setPhAdmins(List<User> phAdmins) {
 		this.phAdmins = phAdmins;
+	}
+
+
+	public String getCity() {
+		return city;
+	}
+
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
+	public String getCountry() {
+		return country;
+	}
+
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+
+	public double getMark() {
+		return mark;
+	}
+
+
+	public void setMark(double mark) {
+		this.mark = mark;
 	}
 
 }

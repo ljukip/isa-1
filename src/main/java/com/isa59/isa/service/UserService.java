@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -95,6 +96,17 @@ public class UserService implements UserDetailsService {
         }catch( Exception e ){
             System.out.println("Error during sending email: " + e.getMessage());
         }
+	}
+
+	public List<User> getPatients() {
+		List<User> allUsers = userRepository.findAll();
+		List<User> patients = new ArrayList<>();
+		for(User u : allUsers) {
+			if(u.getRole().equals("PATIENT")) {
+				patients.add(u);
+			}
+		}
+		return patients;
 	}
 
 }
